@@ -1,0 +1,52 @@
+const config = {
+  title: "Daffa Hakim | website Development Enthusiast",
+  description: {
+    long: "Welcome to the portfolio of Daffa Hakim, a Software Engineer with over 1.5 years of experience in Development, DevOps, and Database Management. Skilled in building scalable applications, automating workflows, and collaborating with international clients through freelance projects. Known for strong analytical thinking, clear communication, and a team-oriented mindset to drive efficient digital solutions and continuous improvement.",
+    short:
+      "Explore the portfolio of Daffa Hakim – a Software Engineer and freelancer passionate about Development, DevOps, and real-world problem solving.",
+  },
+  keywords: [
+    "Daffa",
+    "Daffa Hakim",
+    "DaffaHakim",
+    "Daffa Hakim portfolio",
+    "portfolio",
+    "Development",
+    "Database",
+    "AI Docker file optimizer",
+    "Finance me",
+    "creative technologist",
+    "web development",
+    "interactive websites",
+    // "GSAP",
+    "React",
+    "Next.js",
+    // "Spline",
+    // "Framer Motion",
+    "Tailwind CSS",
+    "TypeScript",
+    "Firebase",
+    // "Socket.io",
+    "JavaScript",
+    "TypeScript",
+    "Vue.js",
+    "Express.js",
+    "PostgreSQL",
+    "MongoDB",
+    "Tailwind CSS",
+    "Vercel",
+  ],
+  author: "DAFFA HAKIM",
+  email: "daffahakim70@gmail.com",
+  site: "https://abhijitzende.com",
+
+  social: {
+    twitter: "#",
+    linkedin: "https://www.linkedin.com/in/daffa-hakim-61b89a32b",
+    instagram: "https://www.instagram.com/daffahakim69/",
+    facebook:
+      "https://www.facebook.com/profile.php?id=100010942657778&locale=id_ID",
+    github: "https://github.com/DapotZ",
+  },
+};
+export { config };
