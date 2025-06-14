@@ -475,7 +475,7 @@ const projects: Project[] = [
             <b> CV. Master Dinamika Prakarsa</b>, a company specializing in
             industrial commercial parts, injection molding, extrusion, PCB
             repair, and machinery spare parts. This website showcases the
-            company's services, portfolio, vision & mission, and contact
+            company&apos;s services, portfolio, vision & mission, and contact
             information. Built with <b>Laravel</b> and <b>Tailwind CSS</b>, it
             delivers a professional and informative experience for potential
             clients and business partners. The site also includes a responsive
@@ -601,9 +601,9 @@ const projects: Project[] = [
           />
 
           <TypographyP className="font-mono mt-8 text-center">
-            Agroverse is more than just a farming app — it's a digital ecosystem
-            that bridges modern technology with agricultural growth and
-            collaboration. 🌾🌐
+            Agroverse is more than just a farming app — it&apos;s a digital
+            ecosystem that bridges modern technology with agricultural growth
+            and collaboration. 🌾🌐
           </TypographyP>
         </div>
       );
