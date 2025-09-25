@@ -8,7 +8,7 @@ import React, {
   useState,
 } from "react";
 import { io, Socket } from "socket.io-client";
-import { generateRandomCursor } from "../lib/generate-random-cursor"
+import { generateRandomCursor } from "../lib/generate-random-cursor";
 
 export type User = {
   socketId: string;
@@ -53,18 +53,28 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
 
   // SETUP SOCKET.IO
   useEffect(() => {
-    const username =  localStorage.getItem("username") || generateRandomCursor().name
-    const socket = io(process.env.NEXT_PUBLIC_WS_URL!, {
+    const username =
+      localStorage.getItem("username") || generateRandomCursor().name;
+
+    const socket = io({
+      path: "/api/socketio",
       query: { username },
     });
+
     setSocket(socket);
-    socket.on("connect", () => {});
+
+    socket.on("connect", () => {
+      console.log("🔌 Connected:", socket.id);
+    });
+
     socket.on("msgs-receive-init", (msgs) => {
       setMsgs(msgs);
     });
-    socket.on("msg-receive", (msgs) => {
-      setMsgs((p) => [...p, msgs]);
+
+    socket.on("msg-receive", (msg) => {
+      setMsgs((prev) => [...prev, msg]);
     });
+
     return () => {
       socket.disconnect();
     };

@@ -575,7 +575,7 @@ const AnimatedBackground = () => {
             setSplineApp(app);
             bypassLoading();
           }}
-          scene="/assets/skills_keyboard_dapot.spline"
+          scene="https://prod.spline.design/g2OcYMIxiAu3CZik/scene.splinecode"
         />
       </Suspense>
     </>
