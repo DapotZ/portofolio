@@ -352,16 +352,9 @@ const AnimatedBackground = () => {
     splineApp.addEventListener("keyDown", (e) => {
       if (!splineApp) return;
       const skill = SKILLS[e.target.name as SkillNames];
-      if (skill) {
-        setSelectedSkill(skill);
-        splineApp.setVariable("heading", skill.label);
-        splineApp.setVariable("desc", skill.shortDescription);
-        console.log(skill.label);
-      } else {
-        console.warn("Skill tidak ditemukan untuk:", e.target.name);
-        splineApp.setVariable("heading", "Skill tidak dikenal");
-        splineApp.setVariable("desc", "Pastikan nama objek di Spline cocok");
-      }
+      if (skill) setSelectedSkill(skill);
+      splineApp.setVariable("heading", skill.label);
+      splineApp.setVariable("desc", skill.shortDescription);
     });
     splineApp.addEventListener("mouseHover", handleMouseHover);
   };
@@ -575,7 +568,7 @@ const AnimatedBackground = () => {
             setSplineApp(app);
             bypassLoading();
           }}
-          scene="https://prod.spline.design/g2OcYMIxiAu3CZik/scene.splinecode"
+          scene="/assets/skills_keyboard_dapot.spline"
         />
       </Suspense>
     </>
