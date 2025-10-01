@@ -17,6 +17,16 @@ import { config } from "@/data/config";
 const HeroSection = () => {
   const { isLoading } = usePreloader();
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const href = e.currentTarget.href;
+    const targetId = href.replace(/.*#/, "");
+    const elem = document.getElementById(targetId);
+    elem?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section id="hero" className={cn("relative w-full h-screen")}>
       <div className="grid md:grid-cols-2">
@@ -97,7 +107,7 @@ const HeroSection = () => {
                 <div className="md:self-start flex gap-3">
                   <Tooltip delayDuration={300}>
                     <TooltipTrigger asChild>
-                      <Link href={"#contact"}>
+                      <Link href={"#contact"} onClick={handleScroll}>
                         <Button
                           variant={"outline"}
                           className="block w-full overflow-hidden"
