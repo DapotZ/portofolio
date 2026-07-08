@@ -211,6 +211,7 @@ const AnimatedBackground = () => {
   useEffect(() => {
     let rotateKeyboard: gsap.core.Tween;
     let teardownKeyboard: gsap.core.Tween;
+    let isAborted = false;
     (async () => {
       if (!splineApp) return;
       const kbd: SPEObject | undefined = splineApp.findObjectByName("keyboard");
@@ -260,26 +261,31 @@ const AnimatedBackground = () => {
       }
       if (activeSection === "projects") {
         await sleep(300);
-        bongoAnimation?.start();
+        if (!isAborted) bongoAnimation?.start();
       } else {
         await sleep(200);
-        bongoAnimation?.stop();
+        if (!isAborted) bongoAnimation?.stop();
       }
       if (activeSection === "contact") {
         await sleep(600);
-        teardownKeyboard.restart();
-        keycapAnimtations?.start();
+        if (!isAborted) {
+          teardownKeyboard.restart();
+          keycapAnimtations?.start();
+        }
       } else {
         await sleep(600);
-        teardownKeyboard.pause();
-        keycapAnimtations?.stop();
+        if (!isAborted) {
+          teardownKeyboard.pause();
+          keycapAnimtations?.stop();
+        }
       }
     })();
     return () => {
+      isAborted = true;
       if (rotateKeyboard) rotateKeyboard.kill();
       if (teardownKeyboard) teardownKeyboard.kill();
     };
-  }, [activeSection, splineApp]);
+  }, [activeSection, splineApp, bongoAnimation, keycapAnimtations]);
 
   const [keyboardRevealed, setKeyboardRevealed] = useState(false);
   const router = useRouter();
@@ -288,6 +294,7 @@ const AnimatedBackground = () => {
     const hash = activeSection === "hero" ? "#" : `#${activeSection}`;
     router.push("/" + hash, { scroll: false });
     if (!splineApp || isLoading || keyboardRevealed) return;
+    setKeyboardRevealed(true);
     revealKeyCaps();
   }, [splineApp, isLoading, activeSection]);
   const revealKeyCaps = async () => {
@@ -297,7 +304,6 @@ const AnimatedBackground = () => {
     kbd.visible = false;
     await sleep(400);
     kbd.visible = true;
-    setKeyboardRevealed(true);
     console.log(activeSection);
     gsap.fromTo(
       kbd?.scale,
@@ -493,8 +499,9 @@ const AnimatedBackground = () => {
     if (!frame1 || !frame2 || !framesParent)
       return { start: () => {}, stop: () => {} };
 
-    let interval: NodeJS.Timeout;
+    let interval: NodeJS.Timeout | null = null;
     const start = () => {
+      if (interval) return;
       let i = 0;
       framesParent.visible = true;
       interval = setInterval(() => {
@@ -509,7 +516,10 @@ const AnimatedBackground = () => {
       }, 100);
     };
     const stop = () => {
-      clearInterval(interval);
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
       framesParent.visible = false;
       frame1.visible = false;
       frame2.visible = false;
@@ -556,6 +566,7 @@ const AnimatedBackground = () => {
     };
     const removePrevTweens = () => {
       tweens.forEach((t) => t.kill());
+      tweens = [];
     };
     return { start, stop };
   };
